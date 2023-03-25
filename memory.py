@@ -10,6 +10,7 @@ tiles = ["👿","🤑","😎","😍","🤓","🥸","🥳","🥶"] * 8
 state = {'mark': None}
 hide = [True] * 64
 taps = 0
+num = 0
 
 def square(x, y):
     """Draw white square with black outline at (x, y)."""
@@ -72,6 +73,13 @@ def draw():
         goto(-170, 130)
         global taps
         write('taps: ' + str(taps), move=True, font=('Arial', 20, 'normal'))
+        if mark is None:
+        global num
+        num += 1
+        if num >= 32:
+            print('ganaste')
+            goto(0,0)
+            write('Ganaste', font=('Arial', 30, 'normal'))
 
     update()
     ontimer(draw, 100)
