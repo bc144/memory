@@ -9,7 +9,7 @@ car = path('car.gif')
 tiles = list(range(32)) * 2
 state = {'mark': None}
 hide = [True] * 64
-
+taps = 0
 
 def square(x, y):
     """Draw white square with black outline at (x, y)."""
@@ -41,6 +41,8 @@ def tap(x, y):
 
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
+        global taps
+        taps = taps + 1
     else:
         hide[spot] = False
         hide[mark] = False
@@ -67,6 +69,9 @@ def draw():
         goto(x + 2, y)
         color('black')
         write(tiles[mark], font=('Arial', 30, 'normal'))
+        goto(-170, 130)
+        global taps
+        write('taps: ' + str(taps), move=True, font=('Arial', 20, 'normal'))
 
     update()
     ontimer(draw, 100)
